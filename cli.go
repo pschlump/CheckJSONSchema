@@ -42,14 +42,14 @@ func main() {
 		panic(err.Error())
 	}
 
-	if result.Valid() {
-		fmt.Printf("Document is invalid.\nErrors:\n")
+	if !result.Valid() {
+		fmt.Printf("%s is invalid.\nErrors:\n", *Data)
 		for _, desc := range result.Errors() {
 			fmt.Printf("- %s\n", desc)
 		}
 		os.Exit(1)
 	}
 
-	fmt.Printf("The document is valid\n")
+	fmt.Printf("The %s is valid\n", *Data)
 	os.Exit(0)
 }
