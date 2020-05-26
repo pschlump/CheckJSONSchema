@@ -8,7 +8,7 @@ Go module.  The module implements JSONSchema in Go.
 
 Command Line has 2 options
 
-- `-s` the schema file name
-- `-d` the data in JSON to check
+- `-s` <schema-file.json> the schema file name
+- `-d` <file.json> the data in JSON to check
 
 

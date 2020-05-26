@@ -20,8 +20,6 @@ func main() {
 
 	flag.Parse()
 
-	// schemaLoader := gojsonschema.NewReferenceLoader("file:///home/me/schema.json")
-	// documentLoader := gojsonschema.NewReferenceLoader("file:///home/me/document.json")
 	if *Schema == "" {
 		fmt.Printf("Missing -s/--schema file name\n")
 		os.Exit(1)
@@ -45,11 +43,13 @@ func main() {
 	}
 
 	if result.Valid() {
-		fmt.Printf("The document is valid\n")
-	} else {
-		fmt.Printf("The document is not valid. see errors :\n")
+		fmt.Printf("Document is invalid.\nErrors:\n")
 		for _, desc := range result.Errors() {
 			fmt.Printf("- %s\n", desc)
 		}
+		os.Exit(1)
 	}
+
+	fmt.Printf("The document is valid\n")
+	os.Exit(0)
 }
