@@ -17,15 +17,30 @@ func init() {
 }
 
 func main() {
+	func_main()
+}
+
+func func_main() {
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "CheckJSONSchema: Usage: %s [flags]\n", os.Args[0])
+		flag.PrintDefaults()
+	}
 
 	flag.Parse()
+	fns := flag.Args()
+
+	if len(fns) > 0 {
+		flag.Usage()
+	}
 
 	if *Schema == "" {
-		fmt.Printf("Missing -s/--schema file name\n")
+		fmt.Printf("Missing -s/--schema <file name>\n")
+		flag.Usage()
 		os.Exit(1)
 	}
 	if *Data == "" {
-		fmt.Printf("Missing -d/--data file name\n")
+		fmt.Printf("Missing -d/--data <file name>\n")
+		flag.Usage()
 		os.Exit(1)
 	}
 
